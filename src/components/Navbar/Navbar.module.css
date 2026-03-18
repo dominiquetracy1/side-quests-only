@@ -14,6 +14,7 @@
   color: var(--primary-forest);
   letter-spacing: 1px;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .accent {
@@ -26,10 +27,11 @@
 }
 
 .link {
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 700;
   color: var(--text-main);
   cursor: pointer;
+  letter-spacing: 1px;
   transition: var(--transition-smooth);
 }
 
