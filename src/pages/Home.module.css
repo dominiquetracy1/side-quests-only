@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - var(--header-height));
+  text-align: center;
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--primary-forest);
+  margin-bottom: 2rem;
+  letter-spacing: -2px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.questButton {
+  padding: 0.9rem 2.25rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  border: none;
+  background-color: var(--accent-gold);
+  color: var(--white);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.questButton:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.05);
+  box-shadow: 0 8px 20px rgba(212, 163, 115, 0.2);
+}
