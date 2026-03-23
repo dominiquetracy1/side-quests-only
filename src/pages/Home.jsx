@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Home.module.css";
 
 const BOUNTIES = [
@@ -20,18 +21,18 @@ const BOUNTIES = [
 ];
 
 const Home = () => {
+  const navigate = useNavigate();
   const [currentBounty, setCurrentBounty] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [streak, setStreak] = useState(0);
   const [hoverText, setHoverText] = useState("Side Quests Only");
-  const [activeOverlay, setActiveOverlay] = useState(null);
 
   useEffect(() => {
     const savedQuest = localStorage.getItem("activeSideQuest");
     const savedStreak = localStorage.getItem("questStreak");
 
     if (savedQuest) setCurrentBounty(savedQuest);
-    if (savedStreak) setStreak(parseInt(savedStreak));
+    if (savedStreak) setStreak(parseInt(savedStreak) || 0);
   }, []);
 
   const getRank = (count) => {
@@ -44,7 +45,6 @@ const Home = () => {
   const rollBounty = () => {
     setIsSearching(true);
     setCurrentBounty("");
-    setActiveOverlay(null);
 
     setTimeout(() => {
       const randomQuest = BOUNTIES[Math.floor(Math.random() * BOUNTIES.length)];
@@ -79,7 +79,7 @@ const Home = () => {
         Curated Dallas adventures for your next great story.
       </p>
 
-      {(isSearching || currentBounty || activeOverlay) && (
+      {(isSearching || currentBounty) && (
         <div className={styles.displayArea}>
           {isSearching && (
             <div className={styles.loader}>SEARCHING QUEST BOARD...</div>
@@ -103,29 +103,12 @@ const Home = () => {
               </div>
             </div>
           )}
-
-          {activeOverlay && !isSearching && !currentBounty && (
-            <div className={styles.infoPopup}>
-              <button
-                className={styles.closeBtn}
-                onClick={() => setActiveOverlay(null)}
-              >
-                ✕
-              </button>
-              <h3>{activeOverlay}</h3>
-              <p>
-                This feature is currently under development. Check back after
-                your next quest!
-              </p>
-            </div>
-          )}
         </div>
       )}
 
       <div className={styles.buttonGroup}>
         <button
           className={styles.primaryButton}
-          onClick={() => setActiveOverlay("Interactive Map")}
           onMouseEnter={() => setHoverText("Navigate Dallas")}
           onMouseLeave={() => setHoverText("Side Quests Only")}
         >
@@ -133,7 +116,7 @@ const Home = () => {
         </button>
         <button
           className={styles.secondaryButton}
-          onClick={() => setActiveOverlay("Quest Board")}
+          onClick={() => navigate("/board")}
           onMouseEnter={() => setHoverText("Pick a Mission")}
           onMouseLeave={() => setHoverText("Side Quests Only")}
         >

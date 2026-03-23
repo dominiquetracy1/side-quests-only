@@ -1,14 +1,16 @@
 import React from "react";
-import Navbar from "./components/Navbar/Navbar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import "./index.css";
+import QuestBoard from "./pages/QuestBoard";
 
 function App() {
   return (
-    <div className="app-container">
-      <Navbar />
-      <Home />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/board" element={<QuestBoard />} />
+      </Routes>
+    </Router>
   );
 }
 
