@@ -3,7 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
 import styles from "./QuestMap.module.css";
 
-mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
+mapboxgl.accessToken =
+  process.env.REACT_APP_MAPBOX_TOKEN || import.meta.env.VITE_MAPBOX_TOKEN;
 
 const QuestMap = () => {
   const mapContainer = useRef(null);
